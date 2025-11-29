@@ -153,7 +153,7 @@ export default function Home() {
       <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50">
         <div className="space-y-6 text-center">
           <div className="space-y-2">
-            <h1 className="text-4xl font-bold text-gray-900">X My Posts</h1>
+            <h1 className="text-4xl font-bold text-gray-900">X Only Posts</h1>
             <p className="text-gray-600">自分の投稿に集中できるシンプルなXクライアント</p>
           </div>
           <button
