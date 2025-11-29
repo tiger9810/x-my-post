@@ -173,7 +173,7 @@ export default function Home() {
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <h1 className="text-xl font-bold text-gray-900">X My Posts</h1>
+            <h1 className="text-xl font-bold text-gray-900">X Only Posts</h1>
           </div>
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-600">@{userInfo?.username || session.user?.name}</span>
