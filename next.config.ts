@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Vercelは画像最適化をネイティブサポートしているため、images設定は不要
   async headers() {
     return [
       {
