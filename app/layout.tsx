@@ -15,18 +15,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "X My Posts",
+  title: "X only Posts",
   description: "自分の投稿に集中できるシンプルなXクライアント",
   openGraph: {
-    title: "X My Posts",
+    title: "X only Posts",
     description: "自分の投稿に集中できるシンプルなXクライアント",
-    siteName: "X My Posts",
+    siteName: "X only Posts",
     locale: "ja_JP",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "X My Posts",
+    title: "X only Posts",
     description: "自分の投稿に集中できるシンプルなXクライアント",
   },
   robots: {
