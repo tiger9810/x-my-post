@@ -14,6 +14,36 @@ export const authOptions: NextAuthOptions = {
             },
         }),
     ],
+    cookies: {
+        sessionToken: {
+            name: `${process.env.NODE_ENV === 'production' ? '__Host-' : ''}next-auth.session-token`,
+            options: {
+                httpOnly: true,
+                sameSite: 'lax',
+                path: '/',
+                secure: process.env.NODE_ENV === 'production',
+                // Domain is intentionally not set to ensure cookies are only sent to the exact domain
+            }
+        },
+        callbackUrl: {
+            name: `${process.env.NODE_ENV === 'production' ? '__Host-' : ''}next-auth.callback-url`,
+            options: {
+                httpOnly: true,
+                sameSite: 'lax',
+                path: '/',
+                secure: process.env.NODE_ENV === 'production',
+            }
+        },
+        csrfToken: {
+            name: `${process.env.NODE_ENV === 'production' ? '__Host-' : ''}next-auth.csrf-token`,
+            options: {
+                httpOnly: true,
+                sameSite: 'lax',
+                path: '/',
+                secure: process.env.NODE_ENV === 'production',
+            }
+        },
+    },
     session: {
         strategy: "jwt",
     },
