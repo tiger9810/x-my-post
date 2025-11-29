@@ -19,6 +19,7 @@ export default function Home() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [deletingTweetId, setDeletingTweetId] = useState<string | undefined>();
   const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   // Fetch user info
   const fetchUserInfo = useCallback(async () => {
@@ -102,8 +103,17 @@ export default function Home() {
 
   // Handle tweet created
   const handleTweetCreated = () => {
-    // Refresh tweets after creating
-    handleRefresh();
+    // Show success message
+    setSuccessMessage("投稿が完了しました！");
+    setError(null);
+    
+    // Auto-hide success message after 3 seconds
+    setTimeout(() => {
+      setSuccessMessage(null);
+    }, 3000);
+    
+    // 投稿後の自動更新は削除（API制限を避けるため）
+    // ユーザーが手動で更新ボタンを押すことで最新のツイートを取得できます
   };
 
   // Delete tweet
@@ -179,6 +189,29 @@ export default function Home() {
 
       {/* Main content */}
       <main className="max-w-2xl mx-auto px-4 py-6 space-y-6">
+        {/* Success message */}
+        {successMessage && (
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4 animate-fade-in">
+            <div className="flex items-start gap-3">
+              <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div className="flex-1">
+                <p className="text-green-800 text-sm font-medium">{successMessage}</p>
+              </div>
+              <button
+                onClick={() => setSuccessMessage(null)}
+                className="text-green-400 hover:text-green-600"
+                aria-label="成功メッセージを閉じる"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Error message */}
         {error && (
           <div className="bg-red-50 border border-red-200 rounded-lg p-4">

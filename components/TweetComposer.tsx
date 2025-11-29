@@ -5,7 +5,7 @@ import { validateTweetText } from "@/lib/utils";
 import TweetPreview from "./TweetPreview";
 
 interface TweetComposerProps {
-    onTweetCreated: () => void;
+    onTweetCreated?: () => void;
     onCreateTweet: (text: string) => Promise<void>;
 }
 
@@ -42,7 +42,8 @@ export default function TweetComposer({
             await onCreateTweet(text);
             setText("");
             setShowPreview(false);
-            onTweetCreated();
+            // Call success callback
+            onTweetCreated?.();
         } catch (err) {
             setError(err instanceof Error ? err.message : "投稿に失敗しました");
             setShowPreview(false);

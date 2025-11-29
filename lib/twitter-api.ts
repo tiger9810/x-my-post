@@ -16,6 +16,13 @@ export async function getUserTweets(
 
         if (!response.ok) {
             const error = await response.json();
+            // Check for rate limit error
+            if (response.status === 429 || error.rateLimitExceeded) {
+                const rateLimitError = new Error(error.error || 'API制限に達しました') as any;
+                rateLimitError.isRateLimit = true;
+                rateLimitError.retryAfter = error.retryAfter;
+                throw rateLimitError;
+            }
             throw new Error(error.error || 'Failed to fetch tweets');
         }
 
@@ -38,6 +45,12 @@ export async function getMe(): Promise<{ id: string; username: string; name: str
 
         if (!response.ok) {
             const error = await response.json();
+            // Check for rate limit error
+            if (response.status === 429 || error.rateLimitExceeded) {
+                const rateLimitError = new Error(error.error || 'API制限に達しました') as any;
+                rateLimitError.isRateLimit = true;
+                throw rateLimitError;
+            }
             throw new Error(error.error || 'Failed to fetch user info');
         }
 
@@ -68,6 +81,12 @@ export async function createTweet(
 
         if (!response.ok) {
             const error = await response.json();
+            // Check for rate limit error
+            if (response.status === 429 || error.rateLimitExceeded) {
+                const rateLimitError = new Error(error.error || 'API制限に達しました') as any;
+                rateLimitError.isRateLimit = true;
+                throw rateLimitError;
+            }
             throw new Error(error.error || 'Failed to create tweet');
         }
 
